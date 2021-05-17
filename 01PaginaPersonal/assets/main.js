@@ -11,11 +11,12 @@ let tab2 = document.getElementById("m2");
 let tab3 = document.getElementById("m3");
 tab1.addEventListener("focus",(e)=>{
     console.log("foco", tab1);
-    document.addEventListener("keydown", (e)=>{
+    tab2.focus();
+    /*document.addEventListener("keydown", (e)=>{
         console.log(e);
         tab2.focus();
         tab1.setAttribute("tabIndex", "-1");
-    })
+    })*/
 },true);
 tab2.addEventListener("focus",(e)=>{
     console.log("foco", tab2);
