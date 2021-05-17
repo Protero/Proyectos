@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador</title>
+    <script src="./assets/main.js" defer></script>
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/css/all.css">
+    <link rel="stylesheet" href="./assets/css/fontawesome.css">
+
+</head>
+<body>
+    <header class="clearfix">
+        <img src="./assets/img/Foto.jpg" alt="Fotografía de Pablo Rodríguez Otero">
+        <div id="buscador" role="search">
+            <form action="result.html" method="GET">
+                <input type="text" name="buscar" id="a1" title="Buscador" placeholder="Introduce el término">
+                <input type="submit" value="buscar">            
+        </form>
+        </div>
+        <nav id="menu">
+            <ul>
+                <li><a href="./index.html" aria-label="Inicio, opción selecionada">Inicio</a></li>
+                <li><a href="./biografia.html">Biografía</a></li>
+                <li><a href="./contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <nav aria-label="Rastro de migas" id="rastromiga">
+            <ul>
+                <li><span>Esta en:</span><a href=./index.html>Inicio</a></li><!--<i class="fas fa-angle-right"></i>-->
+                <li><a href="./biografia.html">Biografía</a></li><!--<i class="fas fa-angle-right"></i>-->
+                <li><a href="./contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <h1>Pablo Rodríguez Otero : Portafolio</h1>
+        <div id="result"></div>
+    </main>
+    <footer>
+        <div id="copy">
+            <p><i class="fas fa-copyright"></i>Manolo la cena te la haces sólo.</p>
+            
+        </div>
+        <div id="redesSociales">
+            <ul>
+                <li><a href="#" aria-label="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+   <!--<script> 
+        let parametros = new URLSearchParams(window.location.search);
+        let result = document.getElementById("result");
+        for (let param of parametros){
+            result.innerHTML += "<h2> Término de búsqueda: " + param[1] + "</h2>";
+        }
+    </script>-->
+</body>
+</html>

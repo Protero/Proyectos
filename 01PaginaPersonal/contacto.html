@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio | Contacto</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+    <header class="clearfix">
+        <img src="./assets/img/Foto.jpg" alt="Fotografía de Pablo Rodríguez Otero">
+        <div id="buscador" role="search">
+            <form action="result.html" method="GET">
+                <input type="text" name="buscar" id="a1" title="Buscador" placeholder="Introduce el término">
+                <input type="submit" value="buscar">   
+                <link rel="stylesheet" href="./assets/css/all.css">
+                <link rel="stylesheet" href="./assets/css/fontawesome.css">         
+        </form>
+        </div>
+        <nav id="menu">
+            <ul>
+                <li><a href="./index.html" >Inicio</a></li>
+                <li><a href="./biografia.html" >Biografía</a></li>
+                <li><a href="./contacto.html" aria-label="Contacto, opción selecionada">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <nav aria-label="Rastro de migas" id="rastromiga">
+            <ul>
+                <li><span>Esta en:</span><a href=./index.html>Inicio</a></li>
+                <li><a href="./biografia.html">Biografía</a></li>
+                <li><a href="./contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <h1>Pablo Rodríguez Otero : Portafolio</h1>
+        <div class="flexContaniner">
+            <div>
+                <h2>Mis perfiles</h2>
+                <ul>
+                    <li><a href="#" aria-label="Linkedin"></a><i class="fab fa-linkedin"></i></li>
+                    <li><a href="#" aria-label="Twitter"></a><i class="fab fa-twitter"></i></li>
+                </ul>
+                <h2>Correo electrónico</h2>
+                <a href="mailto:protero@outlook.es">protero@outlook.es</a>
+            </div>
+            <div class="contact">
+                <h2>Contacta conmigo</h2>
+                    <p class="mesenger">Los campos marcados con * son obligatorios.</p>
+                    <form>
+                        <label for="nombre"><span>*</span> Nombre y apellidos:</label>
+                        <input type="text" id="nombre" required name="name">
+                        <label for="correo"><span>*</span>Dirección de correo:</label>
+                        <input id="correo" required type="email" name="email" >
+                        <label for="telefono">Teléfono:</label>
+                        <input type="text" id="telefono" name="tel">
+                        <label for="mensaje"><span>*</span>Mensaje:</label>
+                        <textarea id="mensaje" rows="4" cols="40" required></textarea>
+                        <br>
+                        <input type="submit"  value="Enviar">
+                     </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div id="copy">
+            <p><i class="fas fa-copyright"></i>Manolo la cena te la haces sólo.</p>
+            
+        </div>
+        <div id="redesSociales">
+            <ul>
+                <li><a href="#" aria-label="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
