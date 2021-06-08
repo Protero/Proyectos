@@ -1,11 +1,13 @@
 console.log("> cargado main.js");
 
 let keyCode = function (tab){
+    console.log(">Tab pasado por parámetro: ", tab.id)
     tab.addEventListener("keyup", (e)=>{
         switch (e.key){
             case "ArrowRight":
                 console.log("> entro botón flecha derecha");
                 document.getElementById("m2").focus();
+                tab.setAttribute("tabIndex", "-1");
                 break;
             default:
                 console.log("> keyCode defeult",e);    
@@ -16,7 +18,16 @@ let keyCode = function (tab){
     },true)
 }
 
+// let menuBar = document.querySelectorAll("#menubar1");
+// console.log(">Contenido de menuBar",menuBar);
+// console.log(">Longitud de menuBar",menuBar[0].children);
 
+// let i = 0;
+
+// for(let element in menuBar[0].children){
+//     console.log("> elemento dentro del for in de menuBarChildren", element[0]);
+//     i++;
+// }
 
 let tab1 = document.getElementById("m1");
 let tab2 = document.getElementById("m2");
