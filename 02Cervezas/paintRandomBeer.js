@@ -3,19 +3,18 @@ const getAllBeers = () =>{
     fetch(`https://api.punkapi.com/v2/beers`)
         .then(resultAPI => resultAPI.json())
         .then(listBeer => {
-        console.log(listBeer);
-        paintAllBeers(listBeer);
+            paintAllBeers(listBeer);
     });    
 }
 
 const paintAllBeers = (listBeer)=>{
-    for (let index in listBeer){
-        paintOneBeer(listBeer[index], index);
-    }
+    const i = Math.floor(Math.random() * listBeer.length); 
+    console.log("i = ", i);
+    for (let index in listBeer) if (i==index) paintOneBeer(listBeer[index], index);
 }
 
 const paintOneBeer = (oneBeer, index) => {
-    console.log(oneBeer);
+    console.log("Entro en paintOneBeer");
     const body = document.querySelector("body");
     const div = document.createElement("div");
     const h2Beer = document.createElement("h2");
@@ -37,5 +36,4 @@ const paintOneBeer = (oneBeer, index) => {
     body.appendChild(div);
 }
 
-getAllBeers();
-
+getAllBeers ();
