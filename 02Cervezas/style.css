@@ -1,4 +1,31 @@
-
 #mapId {
      height: 180px; 
 }
+body{
+    background-color: black;
+    margin-left: 10%;
+}
+* {
+    color: white;
+}
+h1 {
+    color: red;
+}
+.wrapper {
+    display: inline-flex;
+    flex-direction: column;
+}
+a:link, a:visited {
+    background-color: red;
+    color: black;
+    border: 2px solid black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  a:hover, a:active {
+    background-color: rgb(128, 4, 0);
+    color: white;
+  }
