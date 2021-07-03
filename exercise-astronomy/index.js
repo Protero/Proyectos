@@ -6,7 +6,7 @@ require("./config/db");
 
 app.use(express.json());
 
-app.use("/",require("./routes"));
+app.use("/astronomy",require("./routes"));
 
 app.listen(port,()=>{
     console.log(`> Open server http://localhost:${port}`);
