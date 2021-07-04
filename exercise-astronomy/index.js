@@ -4,6 +4,7 @@ const port = 3000;
 
 require("./config/db");
 
+
 app.use(express.json());
 
 app.use("/astronomy",require("./routes"));
@@ -11,3 +12,4 @@ app.use("/astronomy",require("./routes"));
 app.listen(port,()=>{
     console.log(`> Open server http://localhost:${port}`);
 })
+

@@ -8,7 +8,7 @@ const LandingsSchema = new Schema({
     required: true,
   },
   id: {
-    type: String,
+    type: Number,
     unique: true,
     required: true,
   },
@@ -19,23 +19,23 @@ const LandingsSchema = new Schema({
     type: String,
   },
   mass: {
-      type: String,
+      type: Number,
   },
   fall: {
     type: String,
   },
   year: {
-    type: String,
+    type: Date,
   },
   reclat: {
-    type: String,
+    type: Number,
   },
   reclong: {
-    type: String,
+    type: Number,
   },
   geolocation: [{
-    latitude:{type: String,},
-    longitude:{type: String,},
+    latitude:{type: Number,},
+    longitude:{type: Number,},
   }],
 });
 

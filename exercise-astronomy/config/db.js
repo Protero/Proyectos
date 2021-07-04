@@ -12,3 +12,4 @@ mongoose
     console.error("> error trying to connect to mongoDB: ", error.message);
     process.exit(0);
   });
+

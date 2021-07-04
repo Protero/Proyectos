@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const neasSchema = new Schema({
+const NeasSchema = new Schema({
   designation: {
     type: String,
   },
@@ -9,31 +9,31 @@ const neasSchema = new Schema({
     type: String,
   },
   h_mag: {
-    type: String,
+    type: Number,
   },
   moid_au: {
-    type: String,
+    type: Number,
   },
   q_au_1: {
-      type: String,
+      type: Number,
   },
   q_au_2: {
-    type: String,
+    type: Number,
   },
   period_yr: {
-    type: String,
+    type: Number,
   },
   i_deg: {
-    type: String,
+    type: Number,
   },
   pha: {
     type: String,
   },
   orbit_class: {
     type: String,
-  }
+  },
 });
 
-const neas = mongoose.model("neas", neasSchema);
+const neas = mongoose.model("neas", NeasSchema);
 
 module.exports = neas;
