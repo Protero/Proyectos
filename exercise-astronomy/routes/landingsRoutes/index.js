@@ -1,29 +1,24 @@
 const router = require("express").Router();
 const LandingsModel = require("../../models/LandingsSchema");
 const url = require('url');
+const utils = require("../../script/index.js");
+
 
 router.get("/",async(req, res, next)=>{
     const params = url.parse(req.url,true).query;
     let result;
     let date;
-    let dateJson;
-    let dateString;
 
     if (Object.keys(params).length < 2){
         switch(Object.keys(params)[0]){
             case "to":
-                date = new Date(params.to);
-                dateJson = date.toJSON();
-                dateString = dateJson.substring(0, dateJson.length - 1);
-                result = await LandingsModel.find({year:{$eq:dateString}}, {name:1, mass:1, year:1, _id: 0});
+                date = utils.parseDateJson(params.to);
+                result = await LandingsModel.find({year:{$eq:date}}, {name:1, mass:1, year:1, _id: 0});
                 res.send(result);
                 break;
-                break;
             case "from":
-                date = new Date(params.from);
-                dateJson = date.toJSON();
-                dateString = dateJson.substring(0, dateJson.length - 1);
-                result = await LandingsModel.find({year:{$eq:dateString}}, {name:1, mass:1, year:1, _id: 0});
+                date = utils.parseDateJson(params.from);
+                result = await LandingsModel.find({year:{$eq:date}}, {name:1, mass:1, year:1, _id: 0});
                 res.send(result);
                 break;
             case "minium_mass":
@@ -32,14 +27,9 @@ router.get("/",async(req, res, next)=>{
                 break;
         }   
     } else {
-        let dateFrom = new Date(params.from);
-        let dateFromJson = dateFrom.toJSON();
-        let dateFromString = dateFromJson.substring(0, dateFromJson.length - 1);
-        let dateTo = new Date(params.to);
-        let dateToJson = dateTo.toJSON();
-        let dateToString = dateToJson.substring(0, dateToJson.length - 1);
-        console.log(dateFromString, dateToString);
-        result = await LandingsModel.find({ $and: [ {year: {$gte:dateFromString}}, {year: {$lte:dateToString}} ]});
+        const dateFrom = utils.parseDateJson(params.from);
+        const dateTo = utils.parseDateJson(params.to);
+        result = await LandingsModel.find({ $and: [ {year: {$gte:dateFrom}}, {year: {$lte:dateTo}} ]});
         res.send(result);
     }
 })
