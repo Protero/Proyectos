@@ -25,7 +25,7 @@ const LandingsSchema = new Schema({
     type: String,
   },
   year: {
-    type: Date,
+    type: String,
   },
   reclat: {
     type: Number,
