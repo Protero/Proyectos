@@ -24,16 +24,18 @@ router.get("/",async(req, res, next)=>{
                 result = await NeasModel.find({orbit_class:{$eq:params.class}}, {designation:1,period_yr:1, discovery_date:1,_id: 0,});
                 res.send(result);
                 break;
-            // case "PHA":
+            case "pha":
+                const dangerous = 'Y';
+                if (params.pha === 'Y' || params.pha === '1' ){
+                    result = await NeasModel.find({$and: [{pha:{$eq:dangerous}},{moid_au:{$lte:0.05}},{h_mag:{$lte:22.0}}]}, {designation:1, period_yr:1, discovery_date:1, pha: 1,_id: 0,});
+                    res.send(result);
+                }
+                else res.send("No hay resultados que se ajusten a la búsqueda")
                 
-            //     if (params.PHA === 'Y'){
-            //         console.log("> PHA: ", typeof(params.PHA) );
-            //         result = await NeasModel.find({pha:{$eq:params.PHA}}, {designation:1, period_yr:1, discovery_date:1, pha: 1,_id: 0,});
-            //         res.send(result);
-            //     }
-            //     else res.send("No hay resultados que se ajusten a la búsqueda")
-                
-            //     break;
+                break;
+            default:
+                res.send("No hay resultados que se ajusten a la búsqueda")
+                break;
             // case "moid_au":
             //     break;
         }   
