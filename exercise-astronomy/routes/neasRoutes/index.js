@@ -7,6 +7,8 @@ router.get("/",async(req, res, next)=>{
     const params = url.parse(req.url,true).query;
     let result;
     let date;
+    const dangerous = 'Y';
+    const noDangerous = 'N';
 
     if (Object.keys(params).length < 2){
         switch(Object.keys(params)[0]){
@@ -25,27 +27,26 @@ router.get("/",async(req, res, next)=>{
                 res.send(result);
                 break;
             case "pha":
-                const dangerous = 'Y';
-                const noDangerous = 'N';
-                if (params.pha === 'Y' || params.pha === '1' ){
-                    result = await NeasModel.find({$and: [{pha:{$eq:dangerous}},{moid_au:{$lte:0.05}},{h_mag:{$lte:22.0}}]}, {designation:1, period_yr:1, discovery_date:1, pha: 1,_id: 0,});
-                    res.send(result);
+                switch (params.pha){
+                    case "1":
+                        result = await NeasModel.find({$and: [{pha:{$eq:dangerous}},{moid_au:{$lte:0.05}},{h_mag:{$lte:22.0}}]}, {designation:1, period_yr:1, discovery_date:1, pha: 1,_id: 0,});
+                        res.send(result);
+                        break;
+                    case "0":
+                        result = await NeasModel.find({$and: [{pha:{$eq:noDangerous}},{moid_au:{$gte:0.05}},{h_mag:{$gte:22.0}}]}, {designation:1, period_yr:1, discovery_date:1, pha: 1,_id: 0,});
+                        res.send(result);
+                        break;
+                    case "-1":
+                        result = await NeasModel.find({$and: [{pha:{$ne:noDangerous}},{pha:{$ne:dangerous}}]}, {designation:1, period_yr:1, discovery_date:1, pha: 1,_id: 0,});
+                        res.send(result);
+                        break;
                 }
-                else if (params.pha === 'N' || params.pha === '0' ){
-                    result = await NeasModel.find({$and: [{pha:{$eq:noDangerous}},{moid_au:{$gte:0.05}},{h_mag:{$gte:22.0}}]}, {designation:1, period_yr:1, discovery_date:1, pha: 1,_id: 0,});
-                    res.send(result);
-                }
-                else  res.send("No hay resultados que se ajusten a la búsqueda")
-                
                 break;
             default:
                 res.send("No hay resultados que se ajusten a la búsqueda")
                 break;
-            // case "moid_au":
-            //     break;
         }   
     } else {
-
         const dateFrom = params.from;
         const dateTo = params.to;
         result = await NeasModel.find({}, {designation:1, period_yr: 1, discovery_date:1, _id: 0});
