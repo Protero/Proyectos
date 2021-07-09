@@ -26,11 +26,16 @@ router.get("/",async(req, res, next)=>{
                 break;
             case "pha":
                 const dangerous = 'Y';
+                const noDangerous = 'N';
                 if (params.pha === 'Y' || params.pha === '1' ){
                     result = await NeasModel.find({$and: [{pha:{$eq:dangerous}},{moid_au:{$lte:0.05}},{h_mag:{$lte:22.0}}]}, {designation:1, period_yr:1, discovery_date:1, pha: 1,_id: 0,});
                     res.send(result);
                 }
-                else res.send("No hay resultados que se ajusten a la búsqueda")
+                else if (params.pha === 'N' || params.pha === '0' ){
+                    result = await NeasModel.find({$and: [{pha:{$eq:noDangerous}},{moid_au:{$gte:0.05}},{h_mag:{$gte:22.0}}]}, {designation:1, period_yr:1, discovery_date:1, pha: 1,_id: 0,});
+                    res.send(result);
+                }
+                else  res.send("No hay resultados que se ajusten a la búsqueda")
                 
                 break;
             default:
