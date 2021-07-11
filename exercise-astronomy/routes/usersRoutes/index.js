@@ -30,5 +30,11 @@ router.get("/:id/badges",async(req, res, next)=>{
     const result = await UsersModel.find({affiliatedNumber:{$eq:req.params.id}}, {badges:1, _id: 0});
     res.send(result);
 });
+router.get("/:id/neas",async(req, res, next)=>{
+    console.log(req.params.id);
+    const result = await UsersModel.find({affiliatedNumber:{$eq:req.params.id}}, {neasDiscovered:1,_id: 0});
+    res.send(result);
+});
+
 
 module.exports = router;
