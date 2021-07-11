@@ -31,14 +31,22 @@ router.get("/:id/badges",async(req, res, next)=>{
     res.send(result);
 });
 router.get("/:id/neas",async(req, res, next)=>{
-    console.log(req.params.id);
     const result = await UsersModel.find({affiliatedNumber:{$eq:req.params.id}}, {neasDiscovered:1,_id: 0});
     res.send(result);
 });
 router.get("/:id/necs",async(req, res, next)=>{
-    console.log(req.params.id);
     const result = await UsersModel.find({affiliatedNumber:{$eq:req.params.id}}, {necsDiscovered:1,_id: 0});
     res.send(result);
 });
+router.get("/:id/points",async(req, res, next)=>{
+    let sum;
+    const result = await UsersModel.find({affiliatedNumber:{$eq:req.params.id}}, {badges:1,_id: 0});
+    console.log("> Badge/result: ", result);
+    for(let i of result){ 
+        sum += i.badges[0].points
+    }
+    res.send("puntos: ", sum);
+});
+
 
 module.exports = router;
