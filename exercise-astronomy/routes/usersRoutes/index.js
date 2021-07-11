@@ -26,5 +26,9 @@ router.get("/:id",async(req, res, next)=>{
     res.send(resultNewObj);
 });
 
+router.get("/:id/badges",async(req, res, next)=>{
+    const result = await UsersModel.find({affiliatedNumber:{$eq:req.params.id}}, {badges:1, _id: 0});
+    res.send(result);
+});
 
 module.exports = router;
