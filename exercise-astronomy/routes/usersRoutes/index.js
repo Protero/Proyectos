@@ -57,7 +57,28 @@ router.put("/:id",async(req, res, next)=>{
      if (!nickname || !occupation){
         res.send("Falta algún parámetro");
     }
-    result = await UsersModel.replaceOne({affiliatedNumber: id },{nickname,occupation});
+    result = await UsersModel.findOneAndUpdate(
+        {affiliatedNumber: id },
+        {nickname,occupation},
+        { new: true });
+    res.send(result);
+});
+
+router.put("/:id/neas",async(req, res, next)=>{
+
+    const { id } = req.params;
+    const { neasDiscovered} = req.body;
+    let result;
+    
+     if (!neasDiscovered ){
+        res.send("Falta algún parámetro");
+    }
+    result = await UsersModel.find({affiliatedNumber:{$eq:req.params.id}}, {neasDiscovered:1,necsDiscovered:1, _id: 0});
+    console.log(result);
+    // for(let i of result){ 
+    //     sum += i.badges[0].points
+    // }
+    // result = await UsersModel.replaceOne({affiliatedNumber: id },{neasDiscovered});
     res.send(result);
 });
 
