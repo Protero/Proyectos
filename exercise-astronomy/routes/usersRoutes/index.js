@@ -48,5 +48,17 @@ router.get("/:id/points",async(req, res, next)=>{
     res.send("puntos: ", sum);
 });
 
+router.put("/:id",async(req, res, next)=>{
+
+    const { id } = req.params;
+    const { nickname, occupation } = req.body;
+    let result;
+    
+     if (!nickname || !occupation){
+        res.send("Falta algún parámetro");
+    }
+    result = await UsersModel.replaceOne({affiliatedNumber: id },{nickname,occupation});
+    res.send(result);
+});
 
 module.exports = router;
