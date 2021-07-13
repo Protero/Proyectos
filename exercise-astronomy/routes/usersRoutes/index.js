@@ -5,11 +5,11 @@ const utils = require("../../script/index.js");
 
 router.post("/",async(req, res, next)=>{
     let result;
-    const { name, nickname, affiliatedNumber, occupation, birthdate } = req.body;
-    if (!name || !nickname || !affiliatedNumber || !occupation || !birthdate ){
+    const { name, nickname, affiliatedNumber, occupation, birthdate, deleted, astronomicalPoints } = req.body;
+    if (!name || !nickname || !affiliatedNumber || !occupation || !birthdate || !deleted ||  !astronomicalPoints){
         res.send("Falta algún parámetro");
     }
-    result = await UsersModel.create({ name, nickname, affiliatedNumber, occupation, birthdate });
+    result = await UsersModel.create({ name, nickname, affiliatedNumber, occupation, birthdate, deleted, astronomicalPoints });
     res.send(result);
 });
 
@@ -65,21 +65,35 @@ router.put("/:id",async(req, res, next)=>{
 });
 
 router.put("/:id/neas",async(req, res, next)=>{
-
     const { id } = req.params;
-    const { neasDiscovered} = req.body;
+    const {neasDiscovered} = req.body;
     let result;
-    
-     if (!neasDiscovered ){
+        
+    if (!neasDiscovered ){
         res.send("Falta algún parámetro");
     }
-    result = await UsersModel.find({affiliatedNumber:{$eq:req.params.id}}, {neasDiscovered:1,necsDiscovered:1, _id: 0});
-    console.log(result);
-    // for(let i of result){ 
-    //     sum += i.badges[0].points
-    // }
-    // result = await UsersModel.replaceOne({affiliatedNumber: id },{neasDiscovered});
-    res.send(result);
+
+    const resultFind = await UsersModel.find({affiliatedNumber:{$eq:req.params.id}}, {neasDiscovered:1,necsDiscovered:1, _id: 0});
+
+    if (5 >= (resultFind[0].neasDiscovered.length + resultFind[0].necsDiscovered.length )){
+        result = await UsersModel.findOneAndUpdate({affiliatedNumber: id },{$push: {neasDiscovered}},{ new: true });
+        res.send(result);
+        
+    }
+    else{
+        result = await UsersModel.findOneAndUpdate(
+            {affiliatedNumber: id },
+            {$push: {neasDiscovered}},
+            { new: true });
+        res.send(result);
+    }
+});
+
+router.put("/:id/delete",async(req, res, next)=>{
+    const { id } = req.params;
+    console.log(">ID: ",id);
+    const result = await UsersModel.findOneAndUpdate({affiliatedNumber: id },{delete:true},{ new: true });
+        res.send(result);
 });
 
 module.exports = router;
