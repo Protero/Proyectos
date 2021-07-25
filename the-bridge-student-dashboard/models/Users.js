@@ -10,7 +10,16 @@ const UsersSchema = new mongoose.Schema({
     password: {
         type: String,
     },
-
+    role: {
+        type: String,
+        enum: ["USER", "ADMIN"],
+        default: "USER",
+      },
+    name: {
+        type: String,
+        trim: true,
+      },
+    cursos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Courses" }],
 });
 
 UsersSchema.pre("save", async function (next) {
