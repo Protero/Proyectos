@@ -11,6 +11,7 @@ passpord.use("signup",
         try {
             console.log('email',email);
             const user = await UserModel.create({email,password});
+            console.log('-user: ', user);
             return done(null,user);
         } catch (error) {
             done (error);
