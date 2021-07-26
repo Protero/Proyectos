@@ -32,7 +32,7 @@ passport.use(
             try {
                 UserModel.findOne(
                     { email: email },
-                    async  (err, user) => {
+                    async function (err, user) {
                         if (err) return done(err); 
                         if (!user) return done(null, false); 
                         const result = await user.verifyPassword(password);
